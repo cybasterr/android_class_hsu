@@ -12,6 +12,7 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     EditText editText;
     ListView listView;
     CheckBox hideCheckBox;
+    Spinner spinner;
     SharedPreferences sp;
     SharedPreferences.Editor editor;
 
@@ -34,8 +36,10 @@ public class MainActivity extends AppCompatActivity {
         textView = (TextView)findViewById(R.id.textView);
         editText = (EditText)findViewById(R.id.editText);
         listView = (ListView)findViewById(R.id.listView);
+        spinner = (Spinner)findViewById(R.id.spinner);
 
         setListView();
+        setSpinner();
 
         sp = getSharedPreferences("setting", Context.MODE_PRIVATE);
         editor = sp.edit();
@@ -103,5 +107,12 @@ public class MainActivity extends AppCompatActivity {
         String[] data = Utils.readFile(this, "Class0310.txt").split("\n");
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);   //
         listView.setAdapter(adapter);
+    }
+    private void setSpinner()
+    {
+        //String[] data = {"1","2","3","4","5"};
+        String[] data = getResources().getStringArray(R.array.storeInfo);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);   //
+        spinner.setAdapter(adapter);
     }
 }
