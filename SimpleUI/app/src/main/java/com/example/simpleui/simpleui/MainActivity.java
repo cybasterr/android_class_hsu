@@ -7,9 +7,11 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
     TextView textView;
     EditText editText;
+    ListView listView;
     CheckBox hideCheckBox;
     SharedPreferences sp;
     SharedPreferences.Editor editor;
@@ -30,6 +33,9 @@ public class MainActivity extends AppCompatActivity {
 
         textView = (TextView)findViewById(R.id.textView);
         editText = (EditText)findViewById(R.id.editText);
+        listView = (ListView)findViewById(R.id.listView);
+
+        setListView();
 
         sp = getSharedPreferences("setting", Context.MODE_PRIVATE);
         editor = sp.edit();
@@ -68,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         hideCheckBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                editor.putBoolean("hideCheckBox",hideCheckBox.isChecked());
+                editor.putBoolean("hideCheckBox", hideCheckBox.isChecked());
                 editor.apply();
             }
         });
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
     public  void submit(View view)
     {
         String text = editText.getText().toString();
+        Utils.writeFile(this, "Class0310.txt", text + '\n');
         if (hideCheckBox.isChecked())
         {
             Toast.makeText(this,text,Toast.LENGTH_LONG).show();
@@ -87,6 +94,14 @@ public class MainActivity extends AppCompatActivity {
         }
         editText.setText("");
         textView.setText(text);
+        setListView();
+    }
 
+    private void setListView()
+    {
+        //String[] data = {"1","2","3","4","1","2","3","4","1","2","3","4"};
+        String[] data = Utils.readFile(this, "Class0310.txt").split("\n");
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, data);   //
+        listView.setAdapter(adapter);
     }
 }
