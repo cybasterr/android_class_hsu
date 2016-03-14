@@ -16,16 +16,24 @@
         android:id="@+id/textView" />
 
     <Button
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="MENU"
+        android:id="@+id/button2"
+        android:layout_alignTop="@+id/button"
+        android:layout_toLeftOf="@+id/button"
+        android:layout_toStartOf="@+id/button"
+        android:onClick="goToMenu" />
+
+    <Button
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="submit"
         android:id="@+id/button"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="false"
-        android:layout_alignParentTop="false"
         android:onClick="submit"
-        android:layout_below="@+id/editText" />
+        android:layout_below="@+id/editText"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="match_parent"
