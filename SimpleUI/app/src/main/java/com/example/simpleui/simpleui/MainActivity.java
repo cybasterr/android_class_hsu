@@ -1,6 +1,7 @@
 package com.example.simpleui.simpleui;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -114,5 +115,14 @@ public class MainActivity extends AppCompatActivity {
         String[] data = getResources().getStringArray(R.array.storeInfo);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, data);   //
         spinner.setAdapter(adapter);
+    }
+
+    //0314 新增activity
+    public void goToMenu(View view)
+    {
+        Intent intent = new Intent();
+        intent.setClass(this, DrinkMenuActivity.class);
+
+        startActivity(intent);
     }
 }
